@@ -47,6 +47,7 @@ def test_submit_known_hash_does_not_upload(tmp_path):
 
 def test_missing_key_message(monkeypatch):
     monkeypatch.delenv("MDFI_API_KEY", raising=False)
+    monkeypatch.delenv("CLAUDE_PLUGIN_OPTION_API_KEY", raising=False)
     with pytest.raises(ConnectorError) as e:
         client_from_env()
     assert e.value.message == (
@@ -60,6 +61,16 @@ def test_client_from_env_defaults(monkeypatch):
     assert client_from_env().base_url == "https://api.mdfi.ai"
     monkeypatch.setenv("MDFI_API_URL", "http://x:1/")
     assert client_from_env().base_url == "http://x:1"
+
+
+def test_claude_plugin_option_supplies_the_key(monkeypatch):
+    # The Claude directory asks for the key through a sensitive userConfig option,
+    # which Claude Code passes as CLAUDE_PLUGIN_OPTION_API_KEY; MDFI_API_KEY still wins.
+    monkeypatch.delenv("MDFI_API_KEY", raising=False)
+    monkeypatch.setenv("CLAUDE_PLUGIN_OPTION_API_KEY", "from-plugin")
+    assert client_from_env()._http.headers["Authorization"] == "Bearer from-plugin"
+    monkeypatch.setenv("MDFI_API_KEY", "from-env")
+    assert client_from_env()._http.headers["Authorization"] == "Bearer from-env"
 
 
 @pytest.mark.parametrize(

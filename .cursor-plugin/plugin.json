@@ -1,6 +1,6 @@
 {
   "name": "mdfi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read PDFs, scans and Office files page by page through mdfi, with quality flags and CSV table export.",
   "author": { "name": "TopTop Oy" },
   "homepage": "https://mdfi.ai/docs/connector/",

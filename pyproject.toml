@@ -1,6 +1,6 @@
 [project]
 name = "mdfi-connect"
-version = "0.1.0"
+version = "0.1.1"
 description = "MCP stdio connector that lets coding agents read documents through the mdfi cloud API"
 readme = "README.md"
 license = "Apache-2.0"

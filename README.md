@@ -22,7 +22,7 @@ Cursor (`~/.cursor/mcp.json`):
       }
     }
 
-Claude Code plugin (reads the key from `MDFI_API_KEY` in your environment):
+Claude Code plugin (asks for your key when you install it and keeps it as a sensitive setting; runs the plugin's own locked project with `uv run --locked`):
 
     /plugin marketplace add TopTop-Oy/mdfi-connect
     /plugin install mdfi@mdfi

@@ -2,6 +2,7 @@ import logging
 import os
 import re
 import time
+from importlib.metadata import version as _package_version
 from pathlib import Path
 
 try:
@@ -31,7 +32,12 @@ _DOCUMENT_ID = re.compile(
 )
 _TABLE_ID = re.compile(r"p\d+-t\d+")
 
-mcp = FastMCP("mdfi")
+VERSION = _package_version("mdfi-connect")
+try:
+    mcp = FastMCP("mdfi", version=VERSION)
+except TypeError:  # mcp 1.x: FastMCP takes no version; set it on the low-level server
+    mcp = FastMCP("mdfi")
+    mcp._mcp_server.version = VERSION
 log = logging.getLogger("mdfi_connect")
 
 

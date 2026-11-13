@@ -498,3 +498,12 @@ def test_not_ready_pages_show_the_estimate():
     m = manifest(pages=[page(1), page(2, state="converting")], estimated_seconds_left=45)
     out = render_pages({"text": "--- page 1 ---\nx", "not_ready": [2]}, m)
     assert out.endswith("still converting (under a minute left): 2")
+
+
+def test_server_reports_the_package_version():
+    from importlib.metadata import version
+
+    from mdfi_connect.server import mcp
+
+    low = getattr(mcp, "_lowlevel_server", None) or mcp._mcp_server  # mcp 2.x / 1.x
+    assert low.version == version("mdfi-connect")

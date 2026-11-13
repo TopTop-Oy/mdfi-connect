@@ -1,11 +1,17 @@
 {
   "mcpServers": {
     "mdfi": {
-      "command": "uvx",
-      "args": ["mdfi-connect"],
+      "command": "uv",
+      "args": [
+        "run",
+        "--locked",
+        "--no-dev",
+        "--project",
+        "${CLAUDE_PLUGIN_ROOT}",
+        "mdfi-connect"
+      ],
       "env": {
-        "MDFI_API_KEY": "${MDFI_API_KEY}",
-        "MDFI_API_URL": "${MDFI_API_URL:-https://api.mdfi.ai}"
+        "CLAUDE_PLUGIN_OPTION_API_KEY": "${user_config.api_key}"
       }
     }
   }

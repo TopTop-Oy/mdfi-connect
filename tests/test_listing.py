@@ -34,15 +34,21 @@ def test_server_json_points_at_this_package_and_version():
     assert env["MDFI_API_URL"]["default"] == "https://api.mdfi.ai"
 
 
-def test_plugin_runs_the_published_package_with_the_users_key():
+def test_claude_plugin_runs_its_locked_project_with_a_sensitive_key():
+    # The Claude directory refuses a PyPI version as a pin (a release can gain files);
+    # it accepts the plugin's own uv project started with uv run --locked.
     plugin = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text())
     assert plugin["version"] == PROJECT["version"]
+    assert plugin["userConfig"]["api_key"]["sensitive"] is True
     market = json.loads((ROOT / ".claude-plugin" / "marketplace.json").read_text())
     assert [p["name"] for p in market["plugins"]] == [plugin["name"]]
     server = json.loads((ROOT / ".mcp.json").read_text())["mcpServers"]["mdfi"]
-    assert server["command"] == "uvx" and server["args"] == ["mdfi-connect"]
-    # The key is read from the user's environment, never written into the repository.
-    assert server["env"]["MDFI_API_KEY"] == "${MDFI_API_KEY}"
+    assert server["command"] == "uv"
+    assert server["args"] == [
+        "run", "--locked", "--no-dev", "--project", "${CLAUDE_PLUGIN_ROOT}", "mdfi-connect"
+    ]
+    assert server["env"] == {"CLAUDE_PLUGIN_OPTION_API_KEY": "${user_config.api_key}"}
+    assert (ROOT / "uv.lock").is_file()
 
 
 def test_package_links_the_public_repository():

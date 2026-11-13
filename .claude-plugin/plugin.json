@@ -1,10 +1,27 @@
 {
   "name": "mdfi",
-  "version": "0.1.0",
-  "description": "Read PDFs, scans and Office files page by page through mdfi, with quality flags and CSV table export. Needs MDFI_API_KEY in your environment.",
-  "author": { "name": "TopTop Oy", "url": "https://mdfi.ai" },
+  "version": "0.1.1",
+  "description": "Read PDFs, scans and Office files page by page through mdfi, with quality flags and CSV table export. Needs an mdfi plan and API key (app.mdfi.ai).",
+  "author": {
+    "name": "TopTop Oy",
+    "url": "https://mdfi.ai"
+  },
   "homepage": "https://mdfi.ai/docs/connector/",
   "repository": "https://github.com/TopTop-Oy/mdfi-connect",
   "license": "Apache-2.0",
-  "keywords": ["pdf", "documents", "ocr", "tables", "mcp"]
+  "keywords": [
+    "pdf",
+    "documents",
+    "ocr",
+    "tables",
+    "mcp"
+  ],
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "mdfi API key",
+      "description": "From the Connect page of your mdfi dashboard (app.mdfi.ai)",
+      "sensitive": true
+    }
+  }
 }

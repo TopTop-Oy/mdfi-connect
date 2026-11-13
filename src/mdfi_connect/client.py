@@ -121,7 +121,11 @@ class ApiClient:
 
 
 def client_from_env() -> ApiClient:
-    key = os.environ.get("MDFI_API_KEY", "").strip()
+    # CLAUDE_PLUGIN_OPTION_API_KEY: the sensitive option of the Claude Code plugin.
+    key = (
+        os.environ.get("MDFI_API_KEY", "").strip()
+        or os.environ.get("CLAUDE_PLUGIN_OPTION_API_KEY", "").strip()
+    )
     if not key:
         raise ConnectorError(
             "Set MDFI_API_KEY — get one on the Connect page of your mdfi dashboard."

@@ -27,6 +27,8 @@ Claude Code plugin (reads the key from `MDFI_API_KEY` in your environment):
     /plugin marketplace add TopTop-Oy/mdfi-connect
     /plugin install mdfi@mdfi
 
+Cursor plugin (once listed in the Cursor Marketplace): install **mdfi** and set `MDFI_API_KEY` under Plugins → Configure.
+
 The Connect page of your mdfi dashboard (https://app.mdfi.ai) shows these snippets with your key filled in. Plans and pricing: https://mdfi.ai/docs/pricing/
 
 ## Configuration

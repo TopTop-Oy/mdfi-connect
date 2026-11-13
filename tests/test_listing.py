@@ -49,3 +49,16 @@ def test_package_links_the_public_repository():
     urls = PROJECT["urls"]
     assert urls["Repository"] == "https://github.com/TopTop-Oy/mdfi-connect"
     assert SERVER["repository"]["url"] == urls["Repository"]
+
+
+def test_cursor_plugin_declares_the_key_and_runs_the_published_package():
+    # Cursor's marketplace reads .cursor-plugin/plugin.json; the key is a declared
+    # variable that users fill in Cursor's dashboard, never a value in the repo.
+    plugin = json.loads((ROOT / ".cursor-plugin" / "plugin.json").read_text())
+    assert plugin["name"] == "mdfi" and plugin["version"] == PROJECT["version"]
+    assert (ROOT / plugin["logo"]).is_file()
+    assert plugin["variables"]["required"] == ["MDFI_API_KEY"]
+    # Inline, so Cursor does not pick up the Claude Code .mcp.json instead.
+    server = plugin["mcpServers"]["mdfi"]
+    assert server["command"] == "uvx" and server["args"] == ["mdfi-connect"]
+    assert server["env"] == {"MDFI_API_KEY": "${MDFI_API_KEY}"}

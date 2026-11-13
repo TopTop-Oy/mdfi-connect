@@ -1,0 +1,40 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.TopTop-Oy/mdfi-connect",
+  "title": "mdfi",
+  "description": "Read PDFs, scans and Office files page by page, with quality flags and CSV table export.",
+  "repository": {
+    "url": "https://github.com/TopTop-Oy/mdfi-connect",
+    "source": "github"
+  },
+  "websiteUrl": "https://mdfi.ai",
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "mdfi-connect",
+      "version": "0.1.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "MDFI_API_KEY",
+          "description": "Your mdfi API key, from the Connect page of the dashboard (app.mdfi.ai)",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "MDFI_API_URL",
+          "description": "mdfi API address",
+          "isRequired": false,
+          "default": "https://api.mdfi.ai",
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}

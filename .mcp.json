@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "mdfi": {
+      "command": "uvx",
+      "args": ["mdfi-connect"],
+      "env": {
+        "MDFI_API_KEY": "${MDFI_API_KEY}",
+        "MDFI_API_URL": "${MDFI_API_URL:-https://api.mdfi.ai}"
+      }
+    }
+  }
+}

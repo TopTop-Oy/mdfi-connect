@@ -1,0 +1,42 @@
+[project]
+name = "mdfi-connect"
+version = "0.1.0"
+description = "MCP stdio connector that lets coding agents read documents through the mdfi cloud API"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = ["mcp>=1.2,<3", "httpx"]
+authors = [{ name = "TopTop Oy" }]
+keywords = ["mcp", "pdf", "documents", "ocr", "tables", "claude-code", "cursor"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Markup :: Markdown",
+]
+
+[project.urls]
+Homepage = "https://mdfi.ai"
+Documentation = "https://mdfi.ai/docs/connector/"
+Repository = "https://github.com/TopTop-Oy/mdfi-connect"
+
+[project.scripts]
+mdfi-connect = "mdfi_connect.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mdfi_connect"]
+
+[dependency-groups]
+dev = ["pytest", "ruff"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

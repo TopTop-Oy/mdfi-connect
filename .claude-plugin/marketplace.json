@@ -1,0 +1,17 @@
+{
+  "name": "mdfi",
+  "owner": {
+    "name": "TopTop Oy",
+    "url": "https://mdfi.ai"
+  },
+  "metadata": {
+    "description": "mdfi's connector for Claude Code: read documents page by page with quality flags."
+  },
+  "plugins": [
+    {
+      "name": "mdfi",
+      "source": "./",
+      "description": "Read PDFs, scans and Office files page by page through mdfi, with quality flags and CSV table export."
+    }
+  ]
+}

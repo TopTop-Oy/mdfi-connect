@@ -19,7 +19,7 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://mdfi.ai"
-Documentation = "https://mdfi.ai/docs/connector/"
+Documentation = "https://github.com/TopTop-Oy/mdfi-connect#readme"
 Repository = "https://github.com/TopTop-Oy/mdfi-connect"
 
 [project.scripts]

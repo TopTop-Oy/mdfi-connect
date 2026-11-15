@@ -25,5 +25,8 @@
       "sensitive": true
     }
   },
-  "supportUrl": "https://mdfi.ai/#contact"
+  "supportUrl": "https://mdfi.ai/#contact",
+  "documentationUrl": "https://mdfi.ai/docs/connector/",
+  "privacyPolicyUrl": "https://mdfi.ai/docs/data/",
+  "termsOfServiceUrl": "https://mdfi.ai/docs/terms/"
 }

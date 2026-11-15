@@ -68,3 +68,12 @@ def test_cursor_plugin_declares_the_key_and_runs_the_published_package():
     server = plugin["mcpServers"]["mdfi"]
     assert server["command"] == "uvx" and server["args"] == ["mdfi-connect"]
     assert server["env"] == {"MDFI_API_KEY": "${MDFI_API_KEY}"}
+
+
+def test_claude_plugin_links_the_privacy_policy_and_terms():
+    # The Claude plugin directory shows these links and asks for a privacy policy.
+    plugin = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text())
+    assert plugin["privacyPolicyUrl"] == "https://mdfi.ai/docs/data/"
+    assert plugin["termsOfServiceUrl"] == "https://mdfi.ai/docs/terms/"
+    # Without it the directory took app.mdfi.ai from the README as the documentation.
+    assert plugin["documentationUrl"] == "https://mdfi.ai/docs/connector/"
